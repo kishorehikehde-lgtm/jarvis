@@ -2,74 +2,77 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Gate() {
-  const [code, setCode] = useState("");
+  const [phrase, setPhrase] = useState("");
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false); // ✅ NEW
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (code.trim().toLowerCase() === "kishore's jarvis") {
+    if (phrase.trim().toLowerCase() === "jarvis") {
+      setError(false);
+      setSuccess(true);
+
       sessionStorage.setItem("jarvis-auth", "true");
-      navigate("/jarvis");
+
+      // ⏳ cinematic delay before entering your dimension
+      setTimeout(() => {
+        navigate("/jarvis");
+      }, 1600);
     } else {
-      alert("Access Denied");
+      setError(true);
+      setSuccess(false);
     }
   }
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        background: "#020408",
-        color: "#00e5ff",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "monospace",
-        gap: "20px",
-      }}
-    >
-      <h1>Kishore’s Jarvis</h1>
+    <div className="gate-root">
+      <div className="arc-core" />
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-          alignItems: "center",
-        }}
-      >
-        <input
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="enter the phrase"
-          autoFocus
-          style={{
-            padding: "12px 18px",
-            background: "transparent",
-            border: "1px solid #00e5ff",
-            color: "#00e5ff",
-            fontSize: "16px",
-            outline: "none",
-          }}
-        />
+      <div className="gate-panel">
+        <div className="gate-eyebrow">// SYSTEM ACCESS</div>
 
-        <button
-          type="submit"
-          style={{
-            padding: "10px 30px",
-            background: "#00e5ff",
-            color: "#020408",
-            border: "none",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          Enter
-        </button>
-      </form>
+        <h1 className="gate-title">
+          <span className="dim">Kishore’s</span>
+          <br />
+          <span className="accent">JARVIS</span>
+        </h1>
+
+        <div className="gate-sub">Awaiting authorization phrase</div>
+
+        <form className="gate-form" onSubmit={handleSubmit}>
+          <input
+            className={`gate-input ${
+              error ? "error" : success ? "success" : ""
+            }`}
+            placeholder="enter the phrase"
+            value={phrase}
+            disabled={success} // 🔒 lock input once accepted
+            onChange={(e) => {
+              setPhrase(e.target.value);
+              setError(false);
+            }}
+            autoFocus
+          />
+
+          {error && (
+            <div className="gate-error">
+              ACCESS DENIED
+            </div>
+          )}
+
+          {success && (
+            <div className="gate-success">
+              WELCOME, BOSS
+            </div>
+          )}
+
+          <button className="gate-btn" type="submit" disabled={success}>
+            {success ? "ACCESS GRANTED" : "AUTHENTICATE"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

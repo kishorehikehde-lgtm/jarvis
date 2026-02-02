@@ -167,3 +167,245 @@ body{
   .container{ padding: 0 12px; }
   .gate-card{ margin:60px 12px }
 }
+/* ===== GATE ===== */
+
+.gate-root {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0b1220, #020408);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.gate-panel {
+  text-align: center;
+  padding: 48px 56px;
+  border-radius: 16px;
+  background: rgba(10, 18, 32, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.08);
+}
+
+.gate-eyebrow {
+  color: #00e5ff;
+  letter-spacing: 4px;
+  font-size: 0.65rem;
+  margin-bottom: 12px;
+}
+
+.gate-title {
+  color: #fff;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  margin-bottom: 28px;
+}
+
+.gate-title .accent {
+  color: #00e5ff;
+  text-shadow: 0 0 18px rgba(0, 229, 255, 0.6);
+}
+
+.gate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gate-input {
+  background: #020408;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.gate-input:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+}
+
+.gate-btn {
+  background: #00e5ff;
+  color: #020408;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gate-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 229, 255, 0.45);
+}
+/* ===== IRON MAN / AI CORE GATE ===== */
+
+.gate-root {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #0b1220, #020408);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: "Share Tech Mono", monospace;
+}
+
+/* Arc Reactor Glow */
+.arc-core {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 229, 255, 0.35),
+    rgba(0, 229, 255, 0.12),
+    transparent 70%
+  );
+  filter: blur(24px);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.gate-panel {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 56px 64px;
+  border-radius: 18px;
+  background: rgba(6, 12, 24, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow:
+    0 0 60px rgba(0, 229, 255, 0.15),
+    inset 0 0 30px rgba(0, 229, 255, 0.05);
+}
+
+.gate-eyebrow {
+  color: #00e5ff;
+  letter-spacing: 5px;
+  font-size: 0.6rem;
+  margin-bottom: 14px;
+}
+
+.gate-title {
+  font-size: 2.6rem;
+  line-height: 1.05;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.gate-title .dim {
+  opacity: 0.65;
+  font-size: 1.2rem;
+}
+
+.gate-title .accent {
+  color: #00e5ff;
+  text-shadow: 0 0 22px rgba(0, 229, 255, 0.7);
+}
+
+.gate-sub {
+  color: #8fa6c8;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+}
+
+.gate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gate-input {
+  background: #020408;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.gate-input:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.5);
+}
+
+.gate-btn {
+  background: linear-gradient(135deg, #00e5ff, #33f2ff);
+  color: #020408;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.85);
+}
+/* Gate error state */
+
+.gate-error {
+  color: #ff4d6d;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  animation: flicker 0.6s ease-in-out;
+}
+
+.gate-input.error {
+  border-color: rgba(255, 77, 109, 0.9);
+  box-shadow: 0 0 14px rgba(255, 77, 109, 0.6);
+}
+
+@keyframes flicker {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* Gate success state */
+
+.gate-success {
+  color: #00ffe1;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  animation: glowIn 0.6s ease-out;
+}
+
+.gate-input.success {
+  border-color: rgba(0, 255, 225, 0.9);
+  box-shadow: 0 0 18px rgba(0, 255, 225, 0.8);
+}
+
+@keyframes glowIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 /* ═══════════════════════════════════════════════════════
    INJECTED STYLESHEET
@@ -299,7 +301,14 @@ function ProgressRing({ pct }) {
 function fmtKey(y, m, d) { return `${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`; }
 
 export default function Jarvis() {
-  useEffect(() => { if (!sessionStorage.getItem("jarvis-auth")) window.location.href = "/"; }, []);
+  const navigate = useNavigate();
+
+useEffect(() => {
+  if (!sessionStorage.getItem("jarvis-auth")) {
+    navigate("/gate", { replace: true });
+  }
+}, [navigate]);
+
 
   /* inject CSS once */
   useEffect(() => {
