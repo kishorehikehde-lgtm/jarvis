@@ -1,0 +1,684 @@
+/* GateTransition.css */
+.gate-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Shake animation for denied access */
+.gate-transition-overlay.shake-overlay {
+  animation: shake-screen 0.8s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake-screen {
+  10%, 90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(4px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-8px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
+.gate-background-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-pulse 4s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.gate-transition-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RING SYSTEM */
+.ring-system {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+}
+
+/* Error state for rings - change to red */
+.ring-system.error-rings .ring {
+  border-color: rgba(255, 60, 110, 0.6) !important;
+  box-shadow: 0 0 25px rgba(255, 60, 110, 0.4) !important;
+}
+
+.ring-system.error-rings .ring-segment {
+  background: linear-gradient(90deg, transparent, rgba(255, 60, 110, 0.8), transparent) !important;
+  box-shadow: 0 0 10px rgba(255, 60, 110, 0.6) !important;
+}
+
+.ring-system.error-rings .ring-notch,
+.ring-system.error-rings .ring-tick {
+  background: rgba(255, 60, 110, 0.7) !important;
+  box-shadow: 0 0 8px rgba(255, 60, 110, 0.8) !important;
+}
+
+.ring-system.error-rings .core-ring {
+  border-color: rgba(255, 60, 110, 0.8) !important;
+  box-shadow: 
+    0 0 40px rgba(255, 60, 110, 0.6) 
+    inset 0 0 40px rgba(255, 60, 110, 0.3) !important;
+}
+
+.ring-system.error-rings .core-center {
+  background: radial-gradient(circle, rgba(255, 60, 110, 0.4) 0%, rgba(255, 60, 110, 0.1) 50%, transparent 100%) !important;
+}
+
+.ring-system.error-rings .core-dot {
+  background: rgba(255, 60, 110, 1) !important;
+  box-shadow: 
+    0 0 20px rgba(255, 60, 110, 1) 
+    0 0 40px rgba(255, 60, 110, 0.8) !important;
+}
+
+.ring-group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* Outer rings */
+.ring-group.outer .ring-1 {
+  width: 750px;
+  height: 750px;
+  margin: -375px 0 0 -375px;
+  border: 3px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(0, 255, 255, 0.1);
+  animation: spin-cw-slow 12s linear infinite;
+}
+
+.ring-group.outer .ring-2 {
+  width: 650px;
+  height: 650px;
+  margin: -325px 0 0 -325px;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  animation: spin-ccw-med 8s linear infinite;
+}
+
+/* Mid rings */
+.ring-group.mid .ring-3 {
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border: 3px solid rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+  animation: spin-cw-med 6s linear infinite;
+}
+
+.ring-group.mid .ring-4 {
+  width: 420px;
+  height: 420px;
+  margin: -210px 0 0 -210px;
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  animation: spin-ccw-fast 4s linear infinite;
+}
+
+/* Inner rings */
+.ring-group.inner .ring-5 {
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  border: 3px solid rgba(0, 255, 255, 0.6);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+  animation: spin-cw-fast 3s linear infinite;
+}
+
+.ring-group.inner .ring-6 {
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  border: 2px solid rgba(0, 255, 255, 0.5);
+  animation: spin-ccw-vfast 2s linear infinite;
+}
+
+/* Ring decorations */
+.ring-segment {
+  position: absolute;
+  width: 30%;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.8), transparent);
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 50%;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.ring-1 .seg-1 { transform: rotate(0deg) translateX(-50%); }
+.ring-1 .seg-2 { transform: rotate(90deg) translateX(-50%); }
+.ring-1 .seg-3 { transform: rotate(180deg) translateX(-50%); }
+.ring-1 .seg-4 { transform: rotate(270deg) translateX(-50%); }
+
+.ring-3 .seg-1 { transform: rotate(45deg) translateX(-50%); }
+.ring-3 .seg-2 { transform: rotate(165deg) translateX(-50%); }
+.ring-3 .seg-3 { transform: rotate(285deg) translateX(-50%); }
+
+.ring-5 .seg-1 { transform: rotate(90deg) translateX(-50%); }
+.ring-5 .seg-2 { transform: rotate(270deg) translateX(-50%); }
+
+.ring-notch {
+  position: absolute;
+  width: 4px;
+  height: 25px;
+  background: rgba(0, 255, 255, 0.7);
+  top: -2px;
+  left: 50%;
+  transform-origin: 50% 325px;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+.ring-2 .n1 { transform: rotate(0deg); }
+.ring-2 .n2 { transform: rotate(120deg); }
+.ring-2 .n3 { transform: rotate(240deg); }
+
+.ring-tick {
+  position: absolute;
+  width: 3px;
+  height: 15px;
+  background: rgba(0, 255, 255, 0.6);
+  top: -2px;
+  left: 50%;
+  transform-origin: 50% 210px;
+}
+
+.ring-4 .t1 { transform: rotate(0deg); }
+.ring-4 .t2 { transform: rotate(60deg); }
+.ring-4 .t3 { transform: rotate(120deg); }
+.ring-4 .t4 { transform: rotate(180deg); }
+.ring-4 .t5 { transform: rotate(240deg); }
+.ring-4 .t6 { transform: rotate(300deg); }
+
+/* Core system */
+.core-system {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.core-ring {
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  position: absolute;
+  border: 3px solid rgba(0, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.6),
+    inset 0 0 40px rgba(0, 255, 255, 0.3);
+  animation: core-pulse 2s ease-in-out infinite;
+}
+
+.core-center {
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  position: absolute;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, rgba(0, 255, 255, 0.1) 50%, transparent 100%);
+  border-radius: 50%;
+  animation: core-glow 1.5s ease-in-out infinite;
+}
+
+.core-dot {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  position: absolute;
+  background: rgba(0, 255, 255, 1);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 1),
+    0 0 40px rgba(0, 255, 255, 0.8);
+  animation: dot-pulse 1s ease-in-out infinite;
+}
+
+@keyframes spin-cw-slow { to { transform: rotate(360deg); } }
+@keyframes spin-ccw-slow { to { transform: rotate(-360deg); } }
+@keyframes spin-cw-med { to { transform: rotate(360deg); } }
+@keyframes spin-ccw-med { to { transform: rotate(-360deg); } }
+@keyframes spin-cw-fast { to { transform: rotate(360deg); } }
+@keyframes spin-ccw-fast { to { transform: rotate(-360deg); } }
+@keyframes spin-ccw-vfast { to { transform: rotate(-360deg); } }
+
+@keyframes core-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes core-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 
+      0 0 20px rgba(0, 255, 255, 1),
+      0 0 40px rgba(0, 255, 255, 0.8);
+  }
+  50% { 
+    transform: scale(1.3);
+    box-shadow: 
+      0 0 30px rgba(0, 255, 255, 1),
+      0 0 60px rgba(0, 255, 255, 1);
+  }
+}
+
+/* ALIGNMENT PHASE */
+.ring-system.phase-aligning .ring,
+.ring-system.phase-locking .ring,
+.ring-system.phase-locked .ring,
+.ring-system.phase-denied .ring {
+  animation-duration: 1.2s !important;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.ring-system.phase-locking .ring,
+.ring-system.phase-denied .ring {
+  animation-duration: 0.8s !important;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+.ring-system.phase-locked .ring,
+.ring-system.phase-denied .ring {
+  animation: none !important;
+  transform: rotate(0deg) !important;
+}
+
+/* SCAN SYSTEM */
+.scan-system {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.scan-beam {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  background: linear-gradient(180deg, 
+    transparent 0%,
+    rgba(0, 255, 255, 0.6) 45%,
+    rgba(0, 255, 255, 0.9) 50%,
+    rgba(0, 255, 255, 0.6) 55%,
+    transparent 100%);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+  transform-origin: 50% 50%;
+  opacity: 0;
+}
+
+.scan-system.phase-scanning .scan-beam {
+  opacity: 1;
+}
+
+.scan-beam.beam-1 {
+  animation: scan-rotate-1 2s linear infinite;
+}
+
+.scan-beam.beam-2 {
+  animation: scan-rotate-2 2s linear infinite;
+}
+
+.scan-beam.beam-3 {
+  animation: scan-rotate-3 2s linear infinite;
+}
+
+@keyframes scan-rotate-1 {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scan-rotate-2 {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes scan-rotate-3 {
+  to { transform: rotate(360deg); }
+  from { opacity: 0.5; }
+}
+
+.scan-system.phase-aligning .scan-beam,
+.scan-system.phase-locking .scan-beam,
+.scan-system.phase-locked .scan-beam,
+.scan-system.phase-denied .scan-beam {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+/* HUD SYSTEM */
+.hud-system {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.hud-system.phase-scanning,
+.hud-system.phase-aligning {
+  opacity: 0.4;
+}
+
+.hud-system.phase-locking,
+.hud-system.phase-locked,
+.hud-system.phase-denied {
+  opacity: 0.8;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(0, 255, 255, 0.6);
+}
+
+.corner-tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.hud-line {
+  position: absolute;
+  background: rgba(0, 255, 255, 0.3);
+}
+
+.line-h1, .line-h2 {
+  width: 100%;
+  height: 1px;
+  left: 0;
+}
+
+.line-h1 { top: 25%; }
+.line-h2 { bottom: 25%; }
+
+.line-v1, .line-v2 {
+  height: 100%;
+  width: 1px;
+  top: 0;
+}
+
+.line-v1 { left: 25%; }
+.line-v2 { right: 25%; }
+
+/* LOCK SYSTEM */
+.lock-system {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.lock-system.phase-locking,
+.lock-system.phase-locked,
+.lock-system.phase-denied {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lock-bracket {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 255, 255, 0.8);
+}
+
+.bracket-tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.bracket-tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.bracket-bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.bracket-br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.lock-system.phase-locked .lock-bracket {
+  animation: lock-flash 0.4s ease-in-out 3;
+}
+
+/* Error state for lock brackets - red */
+.lock-system.error-lock .lock-bracket {
+  border-color: rgba(255, 60, 110, 0.8) !important;
+}
+
+.lock-system.phase-denied .lock-bracket {
+  animation: lock-flash-error 0.4s ease-in-out 3;
+}
+
+@keyframes lock-flash {
+  0%, 100% {
+    border-color: rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  }
+  50% {
+    border-color: rgba(0, 255, 255, 1);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 1);
+  }
+}
+
+@keyframes lock-flash-error {
+  0%, 100% {
+    border-color: rgba(255, 60, 110, 0.8);
+    box-shadow: 0 0 10px rgba(255, 60, 110, 0.6);
+  }
+  50% {
+    border-color: rgba(255, 60, 110, 1);
+    box-shadow: 0 0 25px rgba(255, 60, 110, 1);
+  }
+}
+
+/* ENERGY WAVES */
+.energy-system {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.energy-wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.energy-system.phase-locking .energy-wave {
+  animation: energy-pulse 0.6s ease-out forwards;
+}
+
+.energy-wave.wave-2 {
+  animation-delay: 0.2s;
+}
+
+.energy-wave.wave-3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes energy-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(8);
+    opacity: 0;
+  }
+}
+
+/* STATUS TEXT */
+.status-text {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  color: rgba(0, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.status-text.phase-scanning,
+.status-text.phase-aligning,
+.status-text.phase-locking,
+.status-text.phase-locked,
+.status-text.phase-denied {
+  opacity: 1;
+}
+
+.status-line {
+  font-size: 12px;
+  margin: 5px 0;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.status-main {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  animation: text-flicker 0.1s infinite alternate;
+}
+
+@keyframes text-flicker {
+  0% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+.status-text.phase-locked .status-main {
+  animation: text-pulse 0.5s ease-in-out 3;
+}
+
+@keyframes text-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(0, 255, 255, 1);
+    transform: scale(1.1);
+  }
+}
+
+/* Error state for status text - red */
+.status-text.error-text {
+  color: rgba(255, 60, 110, 0.9) !important;
+}
+
+.status-text.error-text .status-line {
+  text-shadow: 0 0 10px rgba(255, 60, 110, 0.8) !important;
+}
+
+.status-text.phase-denied .status-main {
+  animation: text-pulse-error 0.5s ease-in-out 3;
+}
+
+@keyframes text-pulse-error {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 60, 110, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(255, 60, 110, 1);
+    transform: scale(1.1);
+  }
+}
